@@ -1,0 +1,23 @@
+{
+  "name": "cleentfaar/decorator",
+  "description": "A PHP library to decorate your values for use in templates and other rendering purposes",
+  "keywords": ["decorate", "decoration", "object", "template"],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Cas Leentfaar",
+      "homepage": "https://github.com/cleentfaar",
+      "email": "info@casleentfaar.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.1"
+  },
+  "autoload": {
+      "psr-0": { "CL\\Decorator\\": "src/" }
+  }
+}

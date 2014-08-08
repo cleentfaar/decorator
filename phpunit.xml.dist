@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors="true" bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite name="Decorator Test Suite">
+            <directory suffix="Test.php">./src/CL/Decorator/Tests/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>./src/CL/Decorator</directory>
+            <exclude>
+                <directory>./src/CL/Decorator/Resources</directory>
+                <directory>./src/CL/Decorator/Tests</directory>
+                <directory>./vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
