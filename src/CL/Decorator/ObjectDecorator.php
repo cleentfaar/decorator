@@ -18,13 +18,13 @@ class ObjectDecorator extends Decorator
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($originalValue)
+    public function inject($originalValue)
     {
         if (!$this->supports($originalValue)) {
             throw new \InvalidArgumentException('You must provide an object as the original value to use an ObjectDecorator');
         }
 
-        parent::__construct($originalValue);
+        return parent::inject($originalValue);
     }
 
     /**

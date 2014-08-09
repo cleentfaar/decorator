@@ -9,33 +9,33 @@
  * file that was distributed with this source code.
  */
 
-namespace CL\Decorator\Tests\Factory;
+namespace CL\Decorator\Tests;
 
-use CL\Decorator\Factory\DelegatingDecoratorFactory;
+use CL\Decorator\DelegatingDecorator;
 
 /**
  * @author Cas Leentfaar
  */
-class DelegatingDecoratorFactoryTest extends \PHPUnit_Framework_TestCase
+class DelegatingDecoratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \CL\Decorator\Factory\DelegatingDecoratorFactory::supports
+     * @covers \CL\Decorator\Factory\DelegatingDecorator::supports
      */
     public function testSupports()
     {
-        $subFactory = $this->getMock('CL\Decorator\Factory\DecoratorFactoryInterface');
+        $subFactory = $this->getMock('CL\Decorator\DecoratorInterface');
         $subFactory->expects($this->once())->method('supports')->will($this->returnValue(true));
-        $delegatingFactory = new DelegatingDecoratorFactory();
-        $delegatingFactory->registerFactory($subFactory);
+        $delegatingFactory = new DelegatingDecorator();
+        $delegatingFactory->registerDecorator($subFactory);
         $this->assertTrue(
             $delegatingFactory->supports('foo.xml'),
             '->supports() returns true if the value is not supported by any decorator factory'
         );
 
-        $subFactory = $this->getMock('CL\Decorator\Factory\DecoratorFactoryInterface');
+        $subFactory = $this->getMock('CL\Decorator\DecoratorInterface');
         $subFactory->expects($this->once())->method('supports')->will($this->returnValue(false));
-        $delegatingFactory = new DelegatingDecoratorFactory();
-        $delegatingFactory->registerFactory($subFactory);
+        $delegatingFactory = new DelegatingDecorator();
+        $delegatingFactory->registerDecorator($subFactory);
         $this->assertFalse(
             $delegatingFactory->supports('foo.foo'),
             '->supports() returns false if the value is not supported by any decorator factory'
@@ -43,16 +43,16 @@ class DelegatingDecoratorFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \CL\Decorator\Factory\DelegatingDecoratorFactory::decorate
+     * @covers \CL\Decorator\DelegatingDecorator::decorate
      */
     public function testDecorate()
     {
-        $subFactory = $this->getMock('CL\Decorator\Factory\DecoratorFactoryInterface');
+        $subFactory = $this->getMock('CL\Decorator\DecoratorInterface');
         $subFactory->expects($this->any())->method('supports')->will($this->returnValue(true));
-        $subFactory->expects($this->once())->method('decorate');
+        $subFactory->expects($this->once())->method('inject');
 
-        $delegatingFactory = new DelegatingDecoratorFactory();
-        $delegatingFactory->registerFactory($subFactory);
+        $delegatingFactory = new DelegatingDecorator();
+        $delegatingFactory->registerDecorator($subFactory);
         $delegatingFactory->decorate('foo');
     }
 }

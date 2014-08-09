@@ -13,7 +13,7 @@ namespace CL\Decorator\Tests\Example;
 
 use CL\Decorator\MagicObjectDecorator;
 
-class UserMagicMock extends MagicObjectDecorator
+class UserMagicDecoratorMock extends MagicObjectDecorator
 {
     /**
      * Returns the user's age
@@ -22,7 +22,7 @@ class UserMagicMock extends MagicObjectDecorator
      */
     public function getAge()
     {
-        $dob = $this->getOriginalValue()->getDateOfBirth();
+        $dob = $this->{'getDateOfBirth'}();
 
         if ($dob instanceof \DateTime) {
             return $dob->diff(new \DateTime())->format('%y');

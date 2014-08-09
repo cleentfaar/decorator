@@ -30,8 +30,7 @@ class ResourceDecoratorTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->resource          = fopen('php://memory', 'r');
-        $this->resourceDecorator = new ResourceDecorator($this->resource);
+        $this->resourceDecorator = new ResourceDecorator();
     }
 
     /**
@@ -39,6 +38,7 @@ class ResourceDecoratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetterMethods()
     {
+        $this->resourceDecorator->inject(fopen('php://memory', 'r'));
         $this->assertInternalType('resource', $this->resourceDecorator->getResource());
         $this->assertEquals('stream', $this->resourceDecorator->getType());
         $this->assertRegExp('/^[0-9]+$/', (string) $this->resourceDecorator->getId());

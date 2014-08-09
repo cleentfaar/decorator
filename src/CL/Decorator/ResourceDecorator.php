@@ -18,13 +18,13 @@ class ResourceDecorator extends Decorator
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($originalValue)
+    public function inject($originalValue)
     {
         if (!$this->supports($originalValue)) {
             throw new \InvalidArgumentException('You must provide a resource as the original value to use a ResourceDecorator');
         }
 
-        parent::__construct($originalValue);
+        parent::inject($originalValue);
     }
 
     /**

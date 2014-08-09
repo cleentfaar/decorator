@@ -11,8 +11,9 @@
 
 namespace CL\Decorator\Tests;
 
+use CL\Decorator\Tests\Example\UserDecoratorMock;
+use CL\Decorator\Tests\Example\UserMagicDecoratorMock;
 use CL\Decorator\Tests\Example\UserMock;
-use CL\Decorator\Tests\Example\UserMagicMock;
 
 /**
  * @author Cas Leentfaar
@@ -20,26 +21,32 @@ use CL\Decorator\Tests\Example\UserMagicMock;
 class MagicObjectDecoratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var UserMagicMock
+     * @var UserMock
      */
-    protected $userDecorator;
+    protected $userMock;
+
+    /**
+     * @var UserMagicDecoratorMock
+     */
+    protected $userDecoratorMock;
 
     protected function setUp()
     {
-        $originalValue = new UserMock();
-        $originalValue->setDateOfBirth(new \DateTime('-27 years'));
+        $this->userMock = new UserMock();
+        $this->userMock->setDateOfBirth(new \DateTime('-27 years'));
 
-        $this->userDecorator = new UserMagicMock($originalValue);
+        $this->userDecoratorMock = new UserMagicDecoratorMock();
+        $this->userDecoratorMock->inject($this->userMock);
     }
 
     /**
      * @covers \CL\Decorator\MagicObjectDecorator::__call
      */
-    public function testDecoratorCall()
+    public function testGetters()
     {
         $this->assertEquals(
             27,
-            $this->userDecorator->{'age'}(),
+            $this->userDecoratorMock->{'age'}(),
             'age should be callable if getAge exists in the magic decorator'
         );
     }
@@ -47,18 +54,21 @@ class MagicObjectDecoratorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \CL\Decorator\MagicObjectDecorator::__call
      */
-    public function testOriginalCall()
+    public function testOriginalGettersSetters()
     {
         $this->assertEquals(
-            $this->userDecorator->{'getDateOfBirth'}(),
-            $this->userDecorator->{'dateOfBirth'}(),
-            'dateOfBirth should be callable if getDateOfBirth exists'
+            $this->userDecoratorMock->{'getDateOfBirth'}(),
+            $this->userMock->getDateOfBirth(),
+            'original method geDateOfBirth should be callable'
         );
 
         $this->assertEquals(
-            $this->userDecorator->{'getDateOfBirth'}(),
-            $this->userDecorator->{'getDateOfBirth'}(),
-            'original method geDateOfBirth should be callable'
+            $this->userDecoratorMock->{'getDateOfBirth'}(),
+            $this->userDecoratorMock->{'dateOfBirth'}(),
+            'dateOfBirth should be callable if getDateOfBirth exists'
         );
+
+        $this->userDecoratorMock->{'setDateOfBirth'}(new \DateTime('-99 years'));
+        $this->assertEquals(99, $this->userDecoratorMock->getAge());
     }
 }

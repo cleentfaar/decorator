@@ -19,7 +19,7 @@ interface DecoratorInterface
     /**
      * @param mixed $originalValue
      */
-    public function __construct($originalValue);
+    public function inject($originalValue);
 
     /**
      * @param mixed $originalValue

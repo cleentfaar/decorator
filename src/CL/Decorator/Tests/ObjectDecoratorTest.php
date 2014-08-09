@@ -24,12 +24,17 @@ class ObjectDecoratorTest extends \PHPUnit_Framework_TestCase
      */
     protected $userDecorator;
 
+    /**
+     * @var UserMock
+     */
+    protected $userMock;
+
     protected function setUp()
     {
-        $originalValue = new UserMock();
-        $originalValue->setDateOfBirth(new \DateTime('-27 years'));
+        $this->userMock = new UserMock();
+        $this->userMock->setDateOfBirth(new \DateTime('-27 years'));
 
-        $this->userDecorator = new UserDecoratorMock($originalValue);
+        $this->userDecorator = new UserDecoratorMock();
     }
 
     /**
@@ -37,6 +42,7 @@ class ObjectDecoratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecoratorCall()
     {
-        $this->assertEquals(27, $this->userDecorator->getAge());
+        $decorator = $this->userDecorator->inject($this->userMock);
+        $this->assertEquals(27, $decorator->getAge());
     }
 }

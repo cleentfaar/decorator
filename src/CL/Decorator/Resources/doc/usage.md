@@ -19,7 +19,7 @@ This is why I created this library. It easily let's you create such 'decorators'
 want them to (not just objects!).
 
 
-## 1) Creating a decorator factory
+## 1) Creating a decorator
 
 Okay let's say we have a UserModel like this:
 
@@ -49,8 +49,6 @@ class UserModel
 ```
 
 You then create a decorator for it like this:
-
-
 ```php
 <?php
 // src/Acme/Decorator/UserDecorator.php
@@ -63,23 +61,8 @@ use CL\Decorator\AbstractDecorator;
 /**
  * Decorates a User object
  */
-class UserDecorator extends AbstractDecorator
+class UserDecorator extends ObjectDecorator
 {
-    /**
-     * @var UserModel
-     */
-    protected $user;
-
-    /**
-     * Constructor.
-     *
-     * @param User $user
-     */
-    public function __construct(UserModel $user)
-    {
-        $this->user = $user;
-    }
-
     /**
      * Returns the user's age
      *
@@ -93,59 +76,15 @@ class UserDecorator extends AbstractDecorator
             return $dob->diff(new \DateTime())->format('%y');
         }
     }
-
-    /**
-     * @return UserModel
-     */
-    protected function getOriginalValue()
-    {
-        return $this->user;
-    }
 }
 ```
 
---NOTE: By extending `AbstractMagicDecorator` instead of `AbstractDecorator` you allow your decorator to access the
+--NOTE: By extending `MagicObjectDecorator` instead of `ObjectDecorator` you allow your decorator to access the
 --original object's methods if the one you are calling does not exist in the decorator. For more information on this,
 --check out the actual class [here](../../AbstractMagicDecorator.php).
 
-And a factory that creates your decorators like this:
 
-```php
-<?php
-// src/Acme/Decorator/UserDecoratorFactory.php
-
-namespace Acme\Decorator;
-
-use Acme\Model\UserModel;
-use CL\Decorator\Factory\DecoratorFactoryInterface;
-
-/**
- * Creates a UserDecorator from a given UserModel
- */
-class UserDecoratorFactory extends DecoratorFactoryInterface
-{
-    /**
-     * Constructor.
-     *
-     * @param UserModel $user
-     */
-    public function decorate($user)
-    {
-        return new UserDecorator($user);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function supports($originalValue)
-    {
-        return $originalValue instanceof UserModel;
-    }
-}
-```
-
-
-## 2) Using the factory
+## 2) Using the decorator
 
 ### Method a) Directly
 
@@ -153,36 +92,38 @@ This is the easiest way, and is enough if you just need to decorate a specific v
 
 ```php
 // ...
-$user                 = new UserModel();
-$userDecoratorFactory = new UserDecoratorFactory();
-// ...
-$user->setDateOfBirth(new \DateTime('-27 years'));
-// ...
-$userDecorator        = $userDecoratorFactory->decorate($user);
 
-// how you would display the age in your HTML
+$user = new UserModel();
+$user->setDateOfBirth(new \DateTime('-27 years'));
+
+// ...
+
+$userDecorator = new UserDecorator();
+$userDecorator = $userDecorator->inject($user);
+
+// how you could display the age in your HTML
 echo $userDecorator->getAge();
 ```
 
-### Method b) Using delegation
+### Method b) Using the delegating decorator
 
 If you have to decorate more than one value, or don't know what type it may be at any time, you are better off using
-an instance of `DelegatingDecoratorFactory`. Although this requires some more steps to implement, it's worth the time
-if you are aiming for flexibility over strictness.
+an instance of the `DelegatingDecorator` class. Although this requires some more steps to implement, it's worth the
+time if you are aiming for flexibility over strictness.
 
-Assuming you created the `UserDecoratorFactory` mentioned above, here is how you would set it up:
+Assuming you created the `UserDecorator` mentioned above, here is how you would set it up:
 
 ```php
 // $userModel = $myDb->getModel('user', 123);
 
-$delegatingDecoratorFactory = new DelegatingDecoratorFactory();
-$delegatingDecoratorFactory->registerFactory(new UserDecoratorFactory());
-$delegatingDecoratorFactory->registerFactory('...'); // more factories if you need them...
+$delegatingDecoratorFactory = new DelegatingDecorator();
+$delegatingDecoratorFactory->registerDecorator(new UserDecorator());
+$delegatingDecoratorFactory->registerDecorator(new ArrayDecorator()); // just an example there can be more
 
 // ...
 
 // Create the decorator without knowing which factory to use
-$userDecorator = $delegatingDecoratorFactory->decorate($userModel); // UserDecorator
+$userDecorator = $delegatingDecorator->decorate($userModel); // returns instance of UserDecorator
 
 // display the age in your HTML
 echo $userDecorator->getAge();

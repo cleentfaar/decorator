@@ -18,13 +18,13 @@ class ArrayDecorator extends Decorator implements \ArrayAccess
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct($originalValue)
+    public function inject($originalValue)
     {
         if (!$this->supports($originalValue)) {
             throw new \InvalidArgumentException('You must provide an array as the original value to use an ArrayDecorator');
         }
 
-        parent::__construct($originalValue);
+        parent::inject($originalValue);
     }
     
     /**

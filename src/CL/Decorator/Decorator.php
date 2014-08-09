@@ -20,10 +20,14 @@ class Decorator
 
     /**
      * @param mixed $originalValue
+     *
+     * @return $this
      */
-    public function __construct($originalValue)
+    public function inject($originalValue)
     {
         $this->originalValue = $originalValue;
+
+        return $this;
     }
 
     /**

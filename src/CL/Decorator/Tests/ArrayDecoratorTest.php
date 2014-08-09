@@ -32,7 +32,8 @@ class ArrayDecoratorTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->arrayDecorator = new ArrayDecorator($this->array);
+        $this->arrayDecorator = new ArrayDecorator();
+        $this->arrayDecorator->inject($this->array);
     }
 
     /**
