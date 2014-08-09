@@ -33,7 +33,7 @@ class ObjectDecoratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers CL\Decorator\AbstractDecorator
+     * @covers CL\Decorator\ObjectDecorator
      */
     public function testDecoratorCall()
     {

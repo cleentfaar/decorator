@@ -33,7 +33,7 @@ class MagicObjectDecoratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers CL\Decorator\AbstractMagicDecorator::__call
+     * @covers \CL\Decorator\MagicObjectDecorator::__call
      */
     public function testDecoratorCall()
     {
@@ -45,7 +45,7 @@ class MagicObjectDecoratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers CL\Decorator\AbstractMagicDecorator::__call
+     * @covers \CL\Decorator\MagicObjectDecorator::__call
      */
     public function testOriginalCall()
     {
