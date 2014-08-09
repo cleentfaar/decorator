@@ -1,10 +1,19 @@
 <?php
 
+/*
+ * This file is part of the Decorator library
+ *
+ * (c) Cas Leentfaar <info@casleentfaar.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace CL\Decorator\Tests\Example;
 
-use CL\Decorator\AbstractMagicDecorator;
+use CL\Decorator\MagicObjectDecorator;
 
-class UserMagicDecoratorMock extends AbstractMagicDecorator
+class UserMagicDecoratorMock extends MagicObjectDecorator
 {
     /**
      * Returns the user's age

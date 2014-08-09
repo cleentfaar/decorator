@@ -20,4 +20,11 @@ interface DecoratorInterface
      * @param mixed $originalValue
      */
     public function __construct($originalValue);
+
+    /**
+     * @param mixed $originalValue
+     *
+     * @return bool
+     */
+    public function supports($originalValue);
 }

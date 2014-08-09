@@ -17,7 +17,7 @@ use CL\Decorator\Tests\Example\UserMagicDecoratorMock;
 /**
  * @author Cas Leentfaar
  */
-class UserMagicDecoratorTest extends \PHPUnit_Framework_TestCase
+class MagicObjectDecoratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var UserMagicDecoratorMock

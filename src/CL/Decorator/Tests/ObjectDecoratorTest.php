@@ -17,7 +17,7 @@ use CL\Decorator\Tests\Example\UserMock;
 /**
  * @author Cas Leentfaar
  */
-class UserDecoratorTest extends \PHPUnit_Framework_TestCase
+class ObjectDecoratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var UserDecoratorMock
