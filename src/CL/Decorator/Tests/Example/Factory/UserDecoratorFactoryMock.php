@@ -3,17 +3,17 @@
 namespace CL\Decorator\Tests\Example\Factory;
 
 use CL\Decorator\Factory\DecoratorFactoryInterface;
-use CL\Decorator\Tests\Example\User;
-use CL\Decorator\Tests\Example\UserDecorator;
+use CL\Decorator\Tests\Example\UserDecoratorMock;
+use CL\Decorator\Tests\Example\UserMock;
 
-class UserDecoratorFactory implements DecoratorFactoryInterface
+class UserDecoratorFactoryMock implements DecoratorFactoryInterface
 {
     /**
      * {@inheritdoc}
      */
     public function decorate($originalValue)
     {
-        return new UserDecorator($originalValue);
+        return new UserDecoratorMock($originalValue);
     }
 
     /**
@@ -21,6 +21,6 @@ class UserDecoratorFactory implements DecoratorFactoryInterface
      */
     public function supports($originalValue)
     {
-        return $originalValue instanceof User;
+        return $originalValue instanceof UserMock;
     }
 }

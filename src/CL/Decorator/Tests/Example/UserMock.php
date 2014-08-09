@@ -8,7 +8,7 @@ namespace CL\Decorator\Tests\Example;
  * A real class would obviously have much more methods to represent a user with, but these will suffice to emulate the
  * decoration functionality during tests.
  */
-class User
+class UserMock
 {
     /**
      * @var \DateTime

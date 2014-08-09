@@ -16,3 +16,7 @@ The library is pretty simple, but here are some docs to get you going:
 
 - [Installation](src/CL/Decorator/Resources/doc/installation.md)
 - [Usage](src/CL/Decorator/Resources/doc/usage.md)
+
+# Thanks
+- @fieg & @pkruithof; original code for decorating entities
+

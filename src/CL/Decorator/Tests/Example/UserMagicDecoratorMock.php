@@ -4,7 +4,7 @@ namespace CL\Decorator\Tests\Example;
 
 use CL\Decorator\AbstractMagicDecorator;
 
-class UserMagicDecorator extends AbstractMagicDecorator
+class UserMagicDecoratorMock extends AbstractMagicDecorator
 {
     /**
      * Returns the user's age
