@@ -19,9 +19,7 @@ class Decorator
     protected $originalValue;
 
     /**
-     * @param mixed $originalValue
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function inject($originalValue)
     {

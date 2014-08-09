@@ -11,10 +11,10 @@
 
 namespace CL\Decorator;
 
-class ObjectDecorator extends Decorator
+class ObjectDecorator extends Decorator implements DelegateableDecoratorInterface
 {
     /**
-     * @param mixed $originalValue
+     * {@inheritdoc}
      *
      * @throws \InvalidArgumentException
      */
@@ -28,9 +28,7 @@ class ObjectDecorator extends Decorator
     }
 
     /**
-     * @param mixed $originalValue
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function supports($originalValue)
     {

@@ -14,12 +14,12 @@ namespace CL\Decorator;
 /**
  * @author Cas Leentfaar
  */
-interface DecoratorInterface
+interface DelegateableDecoratorInterface extends DecoratorInterface
 {
     /**
      * @param mixed $originalValue
      *
-     * @return $this
+     * @return bool
      */
-    public function inject($originalValue);
+    public function supports($originalValue);
 }

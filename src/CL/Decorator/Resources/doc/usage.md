@@ -70,11 +70,19 @@ class UserDecorator extends ObjectDecorator
      */
     public function getAge()
     {
-        $dob = $this->user->getDateOfBirth();
+        $dob = $this->getOriginalValue()->getDateOfBirth();
 
         if ($dob instanceof \DateTime) {
             return $dob->diff(new \DateTime())->format('%y');
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function supports()
+    {
+        return $originalValue instanceof UserModel;
     }
 }
 ```

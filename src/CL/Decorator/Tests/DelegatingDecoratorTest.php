@@ -23,7 +23,7 @@ class DelegatingDecoratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSupports()
     {
-        $subFactory = $this->getMock('CL\Decorator\DecoratorInterface');
+        $subFactory = $this->getMock('CL\Decorator\DelegateableDecoratorInterface');
         $subFactory->expects($this->once())->method('supports')->will($this->returnValue(true));
         $delegatingFactory = new DelegatingDecorator();
         $delegatingFactory->registerDecorator($subFactory);
@@ -32,7 +32,7 @@ class DelegatingDecoratorTest extends \PHPUnit_Framework_TestCase
             '->supports() returns true if the value is not supported by any decorator factory'
         );
 
-        $subFactory = $this->getMock('CL\Decorator\DecoratorInterface');
+        $subFactory = $this->getMock('CL\Decorator\DelegateableDecoratorInterface');
         $subFactory->expects($this->once())->method('supports')->will($this->returnValue(false));
         $delegatingFactory = new DelegatingDecorator();
         $delegatingFactory->registerDecorator($subFactory);
@@ -47,7 +47,7 @@ class DelegatingDecoratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecorate()
     {
-        $subFactory = $this->getMock('CL\Decorator\DecoratorInterface');
+        $subFactory = $this->getMock('CL\Decorator\DelegateableDecoratorInterface');
         $subFactory->expects($this->any())->method('supports')->will($this->returnValue(true));
         $subFactory->expects($this->once())->method('inject');
 

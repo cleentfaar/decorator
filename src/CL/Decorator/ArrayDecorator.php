@@ -11,7 +11,7 @@
 
 namespace CL\Decorator;
 
-class ArrayDecorator extends Decorator implements \ArrayAccess
+class ArrayDecorator extends Decorator implements \ArrayAccess, DelegateableDecoratorInterface
 {
     /**
      * {@inheritdoc}

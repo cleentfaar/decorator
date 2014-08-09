@@ -11,10 +11,10 @@
 
 namespace CL\Decorator;
 
-class ResourceDecorator extends Decorator
+class ResourceDecorator extends Decorator implements DelegateableDecoratorInterface
 {
     /**
-     * @param mixed $originalValue
+     * {@inheritdoc}
      *
      * @throws \InvalidArgumentException
      */
@@ -28,9 +28,7 @@ class ResourceDecorator extends Decorator
     }
 
     /**
-     * @param mixed $originalValue
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function supports($originalValue)
     {

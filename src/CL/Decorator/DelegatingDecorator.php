@@ -14,14 +14,14 @@ namespace CL\Decorator;
 class DelegatingDecorator implements DecoratorInterface
 {
     /**
-     * @var DecoratorInterface[]
+     * @var DelegateableDecoratorInterface[]
      */
     protected $decorators = [];
 
     /**
-     * @param DecoratorInterface $decorator
+     * @param DelegateableDecoratorInterface $decorator
      */
-    public function registerDecorator(DecoratorInterface $decorator)
+    public function registerDecorator(DelegateableDecoratorInterface $decorator)
     {
         $this->decorators[] = $decorator;
     }
