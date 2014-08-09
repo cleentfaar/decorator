@@ -18,5 +18,5 @@ The library is pretty simple, but here are some docs to get you going:
 - [Usage](src/CL/Decorator/Resources/doc/usage.md)
 
 # Thanks
-- @fieg & @pkruithof; ideas on decorating entities specifically
+- @fieg & @pkruithof; original code on decorating entities
 
