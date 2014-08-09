@@ -18,4 +18,4 @@ The library is pretty simple, but here are some docs to get you going:
 - [Usage](src/CL/Decorator/Resources/doc/usage.md)
 
 # Thanks
-- [@fieg](https://github.com/fieg) & [@pkruithof](https://github.com/pkruithof); code ideas for decorating entities specifically.
+- [@fieg](https://github.com/fieg) & [@pkruithof](https://github.com/pkruithof); initial code ideas to decorate entities
