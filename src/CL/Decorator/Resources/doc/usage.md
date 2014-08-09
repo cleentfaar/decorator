@@ -24,7 +24,8 @@ want them to (not just objects!).
 Okay let's say we have a UserModel like this:
 
 ```php
-// Acme\Model\UserModel
+<?php
+// src/Acme/Model/UserModel.php
 
 namespace Acme\Model;
 
@@ -51,9 +52,8 @@ You then create a decorator for it like this:
 
 
 ```php
-
-
 <?php
+// src/Acme/Decorator/UserDecorator.php
 
 namespace Acme\Decorator;
 
@@ -104,10 +104,15 @@ class UserDecorator extends AbstractDecorator
 }
 ```
 
+--NOTE: By extending `AbstractMagicDecorator` instead of `AbstractDecorator` you allow your decorator to access the
+--original object's methods if the one you are calling does not exist in the decorator. For more information on this,
+--check out the actual class [here](../../AbstractMagicDecorator.php).
+
 And a factory that creates your decorators like this:
 
 ```php
 <?php
+// src/Acme/Decorator/UserDecoratorFactory.php
 
 namespace Acme\Decorator;
 
@@ -147,6 +152,7 @@ class UserDecoratorFactory extends DecoratorFactoryInterface
 This is the easiest way, and is enough if you just need to decorate a specific value and know what type it is.
 
 ```php
+// ...
 $user                 = new UserModel();
 $userDecoratorFactory = new UserDecoratorFactory();
 // ...
@@ -154,7 +160,7 @@ $user->setDateOfBirth(new \DateTime('-27 years'));
 // ...
 $userDecorator        = $userDecoratorFactory->decorate($user);
 
-// display the age in your HTML
+// how you would display the age in your HTML
 echo $userDecorator->getAge();
 ```
 
@@ -180,4 +186,10 @@ $userDecorator = $delegatingDecoratorFactory->decorate($userModel); // UserDecor
 
 // display the age in your HTML
 echo $userDecorator->getAge();
+
+// or, if your decorator extended the AbstractMagicDecorator:
+echo $userDecorator->age();
+echo $userDecorator->getAge();
+echo $userDecorator->dateOfBirth();
+echo $userDecorator->getDateOfBirth();
 ```

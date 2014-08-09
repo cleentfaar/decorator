@@ -11,29 +11,29 @@
 
 namespace CL\Decorator\Tests;
 
-use CL\Decorator\Tests\Example\User;
-use CL\Decorator\Tests\Example\UserDecorator;
+use CL\Decorator\Tests\Example\UserDecoratorMock;
+use CL\Decorator\Tests\Example\UserMock;
 
 /**
  * @author Cas Leentfaar
  */
-class UserDecoratorTest extends \PHPUnit_Framework_TestCase
+class ObjectDecoratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var UserDecorator
+     * @var UserDecoratorMock
      */
     protected $userDecorator;
 
     protected function setUp()
     {
-        $originalValue = new User();
+        $originalValue = new UserMock();
         $originalValue->setDateOfBirth(new \DateTime('-27 years'));
 
-        $this->userDecorator = new UserDecorator($originalValue);
+        $this->userDecorator = new UserDecoratorMock($originalValue);
     }
 
     /**
-     * @covers CL\Decorator\AbstractDecorator
+     * @covers CL\Decorator\ObjectDecorator
      */
     public function testDecoratorCall()
     {
