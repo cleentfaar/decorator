@@ -19,7 +19,7 @@ use CL\Decorator\DelegatingDecorator;
 class DelegatingDecoratorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \CL\Decorator\Factory\DelegatingDecorator::supports
+     * @covers \CL\Decorator\DelegatingDecorator::supports
      */
     public function testSupports()
     {
