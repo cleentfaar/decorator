@@ -51,8 +51,8 @@ class DelegatingDecoratorTest extends \PHPUnit_Framework_TestCase
         $subFactory->expects($this->any())->method('supports')->will($this->returnValue(true));
         $subFactory->expects($this->once())->method('inject');
 
-        $delegatingFactory = new DelegatingDecorator();
-        $delegatingFactory->registerDecorator($subFactory);
-        $delegatingFactory->decorate('foo');
+        $delegatingDecorator = new DelegatingDecorator();
+        $delegatingDecorator->registerDecorator($subFactory);
+        $delegatingDecorator->inject('foo');
     }
 }

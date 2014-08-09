@@ -68,7 +68,7 @@ class MagicObjectDecoratorTest extends \PHPUnit_Framework_TestCase
             'dateOfBirth should be callable if getDateOfBirth exists'
         );
 
-        $this->userDecoratorMock->{'setDateOfBirth'}(new \DateTime('-99 years'));
-        $this->assertEquals(99, $this->userDecoratorMock->getAge());
+        $this->userDecoratorMock->{'setDateOfBirth'}(new \DateTime('-50 years'));
+        $this->assertEquals(50, $this->userDecoratorMock->getAge());
     }
 }

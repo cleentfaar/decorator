@@ -35,25 +35,6 @@ class DelegatingDecorator implements DecoratorInterface
     {
         foreach ($this->decorators as $decorator) {
             if ($decorator->supports($originalValue) === true) {
-                $decorator->inject($originalValue);
-            }
-        }
-
-        throw new \InvalidArgumentException(sprintf(
-            'No decorator registered supporting the given value: "%s"',
-            var_export($originalValue, true)
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \InvalidArgumentException If there is no decorator supporting the given value
-     */
-    public function decorate($originalValue)
-    {
-        foreach ($this->decorators as $decorator) {
-            if ($decorator->supports($originalValue) === true) {
                 return $decorator->inject($originalValue);
             }
         }

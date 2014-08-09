@@ -14,7 +14,7 @@ namespace CL\Decorator;
 class ArrayDecorator extends Decorator implements \ArrayAccess
 {
     /**
-     * @param mixed $originalValue
+     * {@inheritdoc}
      *
      * @throws \InvalidArgumentException
      */
@@ -24,7 +24,7 @@ class ArrayDecorator extends Decorator implements \ArrayAccess
             throw new \InvalidArgumentException('You must provide an array as the original value to use an ArrayDecorator');
         }
 
-        parent::inject($originalValue);
+        return parent::inject($originalValue);
     }
     
     /**
